@@ -1,17 +1,18 @@
-# Базовый образ с Python
-FROM python:3.10-slim
+# Базовый образ Python
+FROM python:3.9-slim
 
-# Устанавливаем зависимости системы (чтобы работали OpenCV и rawpy)
-RUN apt-get update && apt-get install -y \
-    libglib2.0-0 libsm6 libxext6 libxrender1 \
-    && rm -rf /var/lib/apt/lists/*
-
-# Копируем код внутрь контейнера
+# Рабочая директория в контейнере
 WORKDIR /app
-COPY . /app
 
-# Ставим зависимости Python
+# Скопировать зависимости
+COPY requirements.txt requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# По умолчанию выводим help
-CMD ["python", "main.py", "-h"]
+# Скопировать весь проект
+COPY . .
+
+# Открыть порт
+EXPOSE 5000
+
+# Запуск приложения
+CMD ["python", "app.py"]
