@@ -1,9 +1,7 @@
-pillow
+Flask
+werkzeug
 imagehash
-piexif
-tqdm
-rawpy
-numpy
-scipy
-scikit-image
+pillow
 opencv-python
+numpy
+scikit-image
